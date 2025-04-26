@@ -17,10 +17,8 @@ class UpdateArticleRequest extends Request implements HasBody
 
     protected Method $method = Method::PUT;
 
+    public function __construct(public ArticleData $articleData) {}
 
-    public function __construct(public ArticleData $articleData){
-
-    }
     public function resolveEndpoint(): string
     {
         return '/articles/'.$this->articleData->id;

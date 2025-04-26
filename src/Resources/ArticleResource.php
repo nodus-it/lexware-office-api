@@ -16,14 +16,15 @@ class ArticleResource extends BaseResource
 {
     public function all(): Paginator
     {
-        return $this->connector->paginate(new GetArticlesRequest());
+        return $this->connector->paginate(new GetArticlesRequest);
     }
 
     /**
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function get(string $id): ArticleData{
+    public function get(string $id): ArticleData
+    {
         return $this->connector->send(new GetArticleRequest($id))->dtoOrFail();
     }
 
@@ -35,7 +36,8 @@ class ArticleResource extends BaseResource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function create(ArticleData $articleData): ArticleData{
+    public function create(ArticleData $articleData): ArticleData
+    {
         return $this->connector->send(new CreateArticleRequest($articleData))->dtoOrFail();
     }
 
@@ -43,7 +45,8 @@ class ArticleResource extends BaseResource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function update(ArticleData $articleData){
+    public function update(ArticleData $articleData)
+    {
         return $this->connector->send(new UpdateArticleRequest($articleData))->dtoOrFail();
     }
 
@@ -51,7 +54,8 @@ class ArticleResource extends BaseResource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function delete(string $articleNumber){
+    public function delete(string $articleNumber)
+    {
         return $this->connector->send(new DeleteArticleRequest($articleNumber))->dtoOrFail();
     }
 }

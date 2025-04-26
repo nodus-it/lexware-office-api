@@ -15,13 +15,11 @@ class GetArticleRequest extends Request implements Paginatable
 
     protected Method $method = Method::GET;
 
-    public function __construct(protected string $id)
-    {
-    }
+    public function __construct(protected string $id) {}
 
     public function resolveEndpoint(): string
     {
-        return '/articles/' . $this->id;
+        return '/articles/'.$this->id;
     }
 
     public function createDtoFromResponse(Response $response): ArticleData

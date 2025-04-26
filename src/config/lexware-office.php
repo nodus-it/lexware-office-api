@@ -2,7 +2,7 @@
 
 return [
     'auth' => [
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Lexware office token
             |--------------------------------------------------------------------------
@@ -12,7 +12,7 @@ return [
             | https://app.lexoffice.de/addons/public-api
             |
             */
-            'token' => env('LEXWARE_OFFICE_API_TOKEN', null),
+        'token' => env('LEXWARE_OFFICE_API_TOKEN', null),
     ],
     'rate_limit' => [
         /*
@@ -24,5 +24,5 @@ return [
         |
         */
         'store' => 'file',
-    ]
+    ],
 ];

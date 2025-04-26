@@ -11,7 +11,7 @@ class LexwarePaginator extends Paginator
     protected function applyPagination(Request $request): Request
     {
         $request->query()->add('page', $this->getCurrentPage());
-        //$request->query()->add('size', "50"); // 25-250 erlaubt
+        // $request->query()->add('size', "50"); // 25-250 erlaubt
 
         return $request;
     }

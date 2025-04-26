@@ -23,7 +23,7 @@ class GetArticlesRequest extends Request implements Paginatable
     protected function defaultQuery(): array
     {
         return [
-            //'type' => 'SERVICE',
+            // 'type' => 'SERVICE',
             'articleNumber' => null,
             'gtin' => null,
 

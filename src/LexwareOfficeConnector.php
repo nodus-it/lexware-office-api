@@ -2,21 +2,16 @@
 
 namespace Nodus\LexwareOfficeApi;
 
-use Illuminate\Cache\MemoizedStore;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use MeinVendor\MeinPackage\LexwarePaginator;
-use Nodus\LexwareOfficeApi\Data\ArticleData;
 use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\PaginationPlugin\Paginator;
 use Saloon\RateLimitPlugin\Limit;
 use Saloon\RateLimitPlugin\Stores\LaravelCacheStore;
-use Saloon\RateLimitPlugin\Stores\MemoryStore;
 use Saloon\RateLimitPlugin\Traits\HasRateLimits;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
@@ -25,15 +20,13 @@ use Saloon\Traits\Plugins\HasTimeout;
 class LexwareOfficeConnector extends Connector implements HasPagination
 {
     use AcceptsJson;
+    use AlwaysThrowOnErrors;
     use HasRateLimits;
     use HasTimeout;
-
-    use AlwaysThrowOnErrors;
 
     protected int $connectTimeout = 30;
 
     protected int $requestTimeout = 30;
-
 
     public function resolveBaseUrl(): string
     {

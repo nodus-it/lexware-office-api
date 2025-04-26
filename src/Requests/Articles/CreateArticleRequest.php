@@ -17,10 +17,8 @@ class CreateArticleRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
+    public function __construct(public ArticleData $articleData) {}
 
-    public function __construct(public ArticleData $articleData){
-
-    }
     public function resolveEndpoint(): string
     {
         return '/articles';
