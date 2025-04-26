@@ -1,0 +1,22 @@
+{
+    "name": "nodus-it/lexware-office-api",
+    "description": "PHP API Client for lexware office",
+    "autoload": {
+        "psr-4": {
+            "MeinVendor\\MeinPackage\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nodus\\LexwareOfficeApi\\LexwareOfficeApiServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "saloonphp/saloon": "^3.0",
+        "saloonphp/rate-limit-plugin": "^2.0.0",
+        "spatie/laravel-data": "^4.15.1",
+        "saloonphp/pagination-plugin": "^2.2.0"
+    }
+}
