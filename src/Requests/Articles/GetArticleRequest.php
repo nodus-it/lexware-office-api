@@ -9,7 +9,7 @@ use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use Saloon\Traits\Request\CreatesDtoFromResponse;
 
-class GetArticleRequest extends Request implements Paginatable
+class GetArticleRequest extends Request
 {
     use CreatesDtoFromResponse;
 
