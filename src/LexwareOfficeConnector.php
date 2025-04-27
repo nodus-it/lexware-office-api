@@ -3,7 +3,6 @@
 namespace Nodus\LexwareOfficeApi;
 
 use Illuminate\Support\Facades\Cache;
-use MeinVendor\MeinPackage\LexwarePaginator;
 use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;

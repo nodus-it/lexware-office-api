@@ -1,13 +1,13 @@
 <?php
 
-namespace MeinVendor\MeinPackage\Resources;
+namespace Nodus\LexwareOfficeApi\Resources;
 
-use MeinVendor\MeinPackage\Requests\Articles\CreateArticleRequest;
-use MeinVendor\MeinPackage\Requests\Articles\DeleteArticleRequest;
-use MeinVendor\MeinPackage\Requests\Articles\GetArticleRequest;
-use MeinVendor\MeinPackage\Requests\Articles\GetArticlesRequest;
-use MeinVendor\MeinPackage\Requests\Articles\UpdateArticleRequest;
 use Nodus\LexwareOfficeApi\Data\ArticleData;
+use Nodus\LexwareOfficeApi\Requests\Articles\CreateArticleRequest;
+use Nodus\LexwareOfficeApi\Requests\Articles\DeleteArticleRequest;
+use Nodus\LexwareOfficeApi\Requests\Articles\GetArticleRequest;
+use Nodus\LexwareOfficeApi\Requests\Articles\GetArticlesRequest;
+use Nodus\LexwareOfficeApi\Requests\Articles\UpdateArticleRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\PaginationPlugin\Paginator;
@@ -45,7 +45,7 @@ class ArticleResource extends BaseResource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function update(ArticleData $articleData)
+    public function update(ArticleData $articleData): ArticleData
     {
         return $this->connector->send(new UpdateArticleRequest($articleData))->dtoOrFail();
     }
@@ -56,6 +56,6 @@ class ArticleResource extends BaseResource
      */
     public function delete(string $articleNumber)
     {
-        return $this->connector->send(new DeleteArticleRequest($articleNumber))->dtoOrFail();
+        return $this->connector->send(new DeleteArticleRequest($articleNumber));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace MeinVendor\MeinPackage\Resources;
+namespace Nodus\LexwareOfficeApi\Resources;
 
 use Nodus\LexwareOfficeApi\LexwareOfficeConnector;
 

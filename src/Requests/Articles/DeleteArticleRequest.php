@@ -1,12 +1,9 @@
 <?php
 
-namespace MeinVendor\MeinPackage\Requests\Articles;
+namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
-use Nodus\LexwareOfficeApi\Data\ArticleData;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
 use Saloon\Traits\Request\CreatesDtoFromResponse;
 
 class DeleteArticleRequest extends Request
@@ -20,10 +17,5 @@ class DeleteArticleRequest extends Request
     public function resolveEndpoint(): string
     {
         return '/articles/'.$this->id;
-    }
-
-    public function createDtoFromResponse(Response $response): ArticleData
-    {
-        return ArticleData::from($response->json());
     }
 }

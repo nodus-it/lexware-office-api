@@ -1,6 +1,6 @@
 <?php
 
-namespace MeinVendor\MeinPackage\Requests\Articles;
+namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
 use Nodus\LexwareOfficeApi\Data\ArticleData;
 use Saloon\Enums\Method;
@@ -32,8 +32,6 @@ class GetArticlesRequest extends Request implements Paginatable
 
     public function createDtoFromResponse(Response $response): array
     {
-        return array_map(function (array $song) {
-            return ArticleData::from($song);
-        }, $response->json('content'));
+        return ArticleData::collect($response->json('content'));
     }
 }

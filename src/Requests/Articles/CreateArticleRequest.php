@@ -1,6 +1,6 @@
 <?php
 
-namespace MeinVendor\MeinPackage\Requests\Articles;
+namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
 use Nodus\LexwareOfficeApi\Data\ArticleData;
 use Saloon\Contracts\Body\HasBody;
