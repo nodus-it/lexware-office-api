@@ -2,7 +2,7 @@
 
 namespace Nodus\LexwareOfficeApi\Resources;
 
-use Nodus\LexwareOfficeApi\LexwareOfficeConnector;
+use Nodus\LexwareOfficeApi\Utils\LexwareOfficeConnector;
 
 class BaseResource
 {

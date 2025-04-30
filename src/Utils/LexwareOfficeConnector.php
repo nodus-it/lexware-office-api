@@ -1,6 +1,6 @@
 <?php
 
-namespace Nodus\LexwareOfficeApi;
+namespace Nodus\LexwareOfficeApi\Utils;
 
 use Illuminate\Support\Facades\Cache;
 use Saloon\Contracts\Authenticator;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nodus\LexwareOfficeApi;
+namespace Nodus\LexwareOfficeApi\Utils;
 
 use Saloon\Http\Request;
 use Saloon\Http\Response;
