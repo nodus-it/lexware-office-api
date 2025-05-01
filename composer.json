@@ -1,17 +1,23 @@
 {
     "name": "nodus-it/lexware-office-api",
     "description": "PHP API Client for lexware office",
-    "autoload": {
-        "psr-4": {
-            "MeinVendor\\MeinPackage\\": "src/"
+    "version": "0.1-dev",
+    "type": "library",
+    "keywords": [
+        "lexware, office, api, client"
+    ],
+    "homepage": "https://github.com/nodus-it/lexware-office-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bastian Schur",
+            "email": "b.schur@nodus-it.de",
+            "homepage": "https://www.nodus-it.de",
+            "role": "Developer"
         }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Nodus\\LexwareOfficeApi\\LexwareOfficeApiServiceProvider"
-            ]
-        }
+    ],
+    "support": {
+        "issues": "https://github.com/nodus-it/lexware-office-api/issues"
     },
     "require": {
         "saloonphp/saloon": "^3.0",
@@ -22,5 +28,17 @@
     "require-dev": {
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nodus\\LexwareOfficeApi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nodus\\LexwareOfficeApi\\LexwareOfficeApiServiceProvider"
+            ]
+        }
     }
 }
