@@ -3,6 +3,7 @@
 namespace Nodus\LexwareOfficeApi\Resources;
 
 use Nodus\LexwareOfficeApi\Data\ArticleData;
+use Nodus\LexwareOfficeApi\Data\Enums\ArticleType;
 use Nodus\LexwareOfficeApi\Requests\Articles\CreateArticleRequest;
 use Nodus\LexwareOfficeApi\Requests\Articles\DeleteArticleRequest;
 use Nodus\LexwareOfficeApi\Requests\Articles\GetArticleRequest;
@@ -14,9 +15,17 @@ use Saloon\PaginationPlugin\Paginator;
 
 class ArticleResource extends BaseResource
 {
-    public function all(): Paginator
+    public function all(
+        ?ArticleType $filterType = null,
+        ?string      $filterArticleNumber = null,
+        ?string      $filterGtin = null
+    ): Paginator
     {
-        return $this->connector->paginate(new GetArticlesRequest);
+        return $this->connector->paginate(new GetArticlesRequest(
+            $filterType,
+            $filterArticleNumber,
+            $filterGtin
+        ));
     }
 
     /**
