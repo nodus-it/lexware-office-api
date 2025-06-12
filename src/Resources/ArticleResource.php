@@ -63,8 +63,8 @@ class ArticleResource extends BaseResource
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function delete(string $articleNumber)
+    public function delete(string $id)
     {
-        return $this->connector->send(new DeleteArticleRequest($articleNumber));
+        return $this->connector->send(new DeleteArticleRequest($id));
     }
 }
