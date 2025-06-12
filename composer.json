@@ -4,7 +4,10 @@
     "version": "0.1-dev",
     "type": "library",
     "keywords": [
-        "lexware, office, api, client"
+        "lexware",
+        "office",
+        "api",
+        "client"
     ],
     "homepage": "https://github.com/nodus-it/lexware-office-api",
     "license": "MIT",
