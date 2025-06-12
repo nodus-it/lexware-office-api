@@ -32,7 +32,8 @@
         "orchestra/testbench": "^v10.2.2",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.22",
-        "pestphp/pest": "^3.8"
+        "pestphp/pest": "^3.8",
+        "fakerphp/faker": "^1.24"
     },
     "autoload": {
         "psr-4": {
