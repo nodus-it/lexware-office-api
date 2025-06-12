@@ -29,7 +29,7 @@ class LexwareOfficeConnector extends Connector implements HasPagination
 
     public function resolveBaseUrl(): string
     {
-        return 'https://api.lexoffice.io/v1/';
+        return 'https://api.lexware.io/v1/';
     }
 
     protected function defaultAuth(): ?Authenticator
