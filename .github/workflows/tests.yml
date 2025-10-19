@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     strategy:
       fail-fast: false
       matrix:
@@ -51,7 +51,7 @@ jobs:
       run: find src tests -name "*.php" -exec php -l {} \;
 
     - name: Execute tests
-      run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      run: vendor/bin/pest --coverage-clover=coverage.xml
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3

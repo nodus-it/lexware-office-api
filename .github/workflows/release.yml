@@ -35,7 +35,7 @@ jobs:
       run: composer validate --strict
 
     - name: Run tests
-      run: vendor/bin/phpunit --no-coverage
+      run: vendor/bin/pest --no-coverage
 
   release:
     needs: test
@@ -73,17 +73,17 @@ jobs:
         release_name: Release ${{ github.ref }}
         body: |
           ## Changes in this Release
-          
+
           Please see the [CHANGELOG.md](CHANGELOG.md) for detailed information about this release.
-          
+
           ## Installation
-          
+
           ```bash
           composer require nodus-it/lexware-office-api:${{ github.ref }}
           ```
-          
+
           ## Requirements
-          
+
           - PHP 8.1 or higher
           - Saloon HTTP client
           - Valid Lexware Office API credentials
