@@ -12,6 +12,7 @@ use Nodus\LexwareOfficeApi\Requests\Articles\UpdateArticleRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\PaginationPlugin\Paginator;
+use Spatie\LaravelData\Data;
 
 /**
  * Article resource for managing articles in Lexware Office API
@@ -134,7 +135,9 @@ class ArticleResource extends BaseResource
      */
     public function update(Data $data): Data
     {
-        return $this->connector->send(new UpdateArticleRequest($data))->dtoOrFail();
+        // Cast to ArticleData for the request
+        $articleData = $data instanceof ArticleData ? $data : ArticleData::from($data->toArray());
+        return $this->connector->send(new UpdateArticleRequest($articleData))->dtoOrFail();
     }
 
     /**
@@ -147,7 +150,8 @@ class ArticleResource extends BaseResource
      */
     public function updateArticle(ArticleData $articleData): ArticleData
     {
-        return $this->update($articleData);
+        $result = $this->update($articleData);
+        return $result instanceof ArticleData ? $result : ArticleData::from($result->toArray());
     }
 
     /**
@@ -171,7 +175,7 @@ class ArticleResource extends BaseResource
      */
     public function findByArticleNumber(string $articleNumber): Paginator
     {
-        return $this->all(filterArticleNumber: $articleNumber);
+        return $this->all(['filterArticleNumber' => $articleNumber]);
     }
 
     /**
@@ -182,7 +186,7 @@ class ArticleResource extends BaseResource
      */
     public function findByGtin(string $gtin): Paginator
     {
-        return $this->all(filterGtin: $gtin);
+        return $this->all(['filterGtin' => $gtin]);
     }
 
     /**
@@ -193,6 +197,6 @@ class ArticleResource extends BaseResource
      */
     public function findByType(ArticleType $type): Paginator
     {
-        return $this->all(filterType: $type);
+        return $this->all(['filterType' => $type]);
     }
 }

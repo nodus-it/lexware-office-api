@@ -8,6 +8,7 @@
 # PHP and Composer
 vendor/
 composer.lock
+composer.phar
 .env
 .env.local
 .env.*.local

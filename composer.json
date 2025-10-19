@@ -1,7 +1,6 @@
 {
     "name": "nodus-it/lexware-office-api",
     "description": "PHP API Client for lexware office",
-    "version": "0.1-dev",
     "type": "library",
     "keywords": [
         "lexware",
