@@ -3,10 +3,12 @@
 namespace Nodus\LexwareOfficeApi\Utils;
 
 use Illuminate\Support\Facades\Cache;
+use Nodus\LexwareOfficeApi\Exceptions\LexwareOfficeException;
 use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\PaginationPlugin\Paginator;
 use Saloon\RateLimitPlugin\Limit;
@@ -52,5 +54,33 @@ class LexwareOfficeConnector extends Connector implements HasPagination
     public function paginate(Request $request): Paginator
     {
         return new LexwarePaginator($this, $request);
+    }
+
+    /**
+     * Handle request exceptions and convert to LexwareOfficeException
+     */
+    public function getRequestException(Response $response, ?\Throwable $salooonException): ?\Throwable
+    {
+        if ($response->failed()) {
+            return LexwareOfficeException::fromResponse($response);
+        }
+
+        return $salooonException;
+    }
+
+    /**
+     * Configure connector from config
+     */
+    public function boot(): void
+    {
+        $config = config('lexware-office');
+        
+        if (isset($config['api']['timeout']['connect'])) {
+            $this->connectTimeout = $config['api']['timeout']['connect'];
+        }
+        
+        if (isset($config['api']['timeout']['request'])) {
+            $this->requestTimeout = $config['api']['timeout']['request'];
+        }
     }
 }
