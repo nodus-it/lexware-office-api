@@ -4,18 +4,11 @@ namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
 use Nodus\LexwareOfficeApi\Data\ArticleData;
 use Nodus\LexwareOfficeApi\Data\Enums\ArticleType;
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use Nodus\LexwareOfficeApi\Requests\BaseListRequest;
 use Saloon\Http\Response;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use Saloon\Traits\Request\CreatesDtoFromResponse;
 
-class GetArticlesRequest extends Request implements Paginatable
+class GetArticlesRequest extends BaseListRequest
 {
-    use CreatesDtoFromResponse;
-
-    protected Method $method = Method::GET;
-
     public function __construct(
         protected ?ArticleType $filterType,
         protected ?string      $filterArticleNumber,
@@ -30,12 +23,11 @@ class GetArticlesRequest extends Request implements Paginatable
 
     protected function defaultQuery(): array
     {
-        return [
-            'type' => $this->filterType,
+        return array_filter([
+            'type' => $this->filterType?->value,
             'articleNumber' => $this->filterArticleNumber,
             'gtin' => $this->filterGtin,
-
-        ];
+        ]);
     }
 
     public function createDtoFromResponse(Response $response): array

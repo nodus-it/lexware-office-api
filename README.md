@@ -178,7 +178,7 @@ if ($paginator->hasNextPage()) {
 The package includes comprehensive testing utilities:
 
 ```php
-use Nodus\LexwareOfficeApi\Testing\LexwareOfficeTestCase;
+use Nodus\LexwareOfficeApi\Tests\LexwareOfficeTestCase;
 
 class ArticleTest extends LexwareOfficeTestCase
 {

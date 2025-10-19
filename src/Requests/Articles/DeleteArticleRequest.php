@@ -2,16 +2,10 @@
 
 namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\Traits\Request\CreatesDtoFromResponse;
+use Nodus\LexwareOfficeApi\Requests\BaseDeleteRequest;
 
-class DeleteArticleRequest extends Request
+class DeleteArticleRequest extends BaseDeleteRequest
 {
-    use CreatesDtoFromResponse;
-
-    protected Method $method = Method::DELETE;
-
     public function __construct(protected string $id) {}
 
     public function resolveEndpoint(): string

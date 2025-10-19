@@ -1,6 +1,6 @@
 <?php
 
-namespace Nodus\LexwareOfficeApi\Testing;
+namespace Nodus\LexwareOfficeApi\Tests;
 
 use Nodus\LexwareOfficeApi\Utils\LexwareOfficeConnector;
 use PHPUnit\Framework\TestCase;

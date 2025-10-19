@@ -1,8 +1,49 @@
-.idea
-.phpunit.cache
-.phpunit.result.cache
-coverage
-vendor
-clover.xml
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# PHP and Composer
+vendor/
 composer.lock
-/.env
+.env
+.env.local
+.env.*.local
+
+# PHPUnit and Testing
+.phpunit.cache/
+.phpunit.result.cache
+coverage/
+tests/results/
+clover.xml
+phpunit.xml.bak
+
+# Build and CI artifacts
+build/
+dist/
+docs/api/
+*.tar.gz
+*.zip
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Cache directories
+.cache/
+.composer-cache/
+
+# Temporary files
+tmp/
+temp/
