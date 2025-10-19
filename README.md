@@ -1,8 +1,11 @@
 # Lexware Office API Package
 
+[![Tests](https://github.com/nodus-it/lexware-office-api/workflows/Tests/badge.svg)](https://github.com/nodus-it/lexware-office-api/actions/workflows/tests.yml)
+[![Coverage](https://github.com/nodus-it/lexware-office-api/workflows/Coverage/badge.svg)](https://github.com/nodus-it/lexware-office-api/actions/workflows/coverage.yml)
 [![License](https://poser.pugx.org/nodus-it/lexware-office-api/license)](https://packagist.org/packages/nodus-it/lexware-office-api)
 [![Latest Stable Version](https://poser.pugx.org/nodus-it/lexware-office-api/v/stable)](https://packagist.org/packages/nodus-it/lexware-office-api)
 [![Total Downloads](https://poser.pugx.org/nodus-it/lexware-office-api/downloads)](https://packagist.org/packages/nodus-it/lexware-office-api)
+[![PHP Version Require](https://poser.pugx.org/nodus-it/lexware-office-api/require/php)](https://packagist.org/packages/nodus-it/lexware-office-api)
 
 A comprehensive PHP package for interacting with the Lexware Office API, built on top of the powerful Saloon HTTP client. This package provides a clean, object-oriented interface for managing articles, contacts, invoices, and other entities in Lexware Office.
 
@@ -313,9 +316,54 @@ Planned:
 - 🔄 Profile
 - 🔄 Event Subscriptions
 
+## Development & Testing
+
+This package uses GitHub Actions for continuous integration and testing:
+
+### Automated Testing
+- **Multi-PHP Version Testing**: Tests run on PHP 8.1, 8.2, and 8.3
+- **Dependency Matrix**: Tests with both `prefer-lowest` and `prefer-stable` dependencies
+- **Code Coverage**: Comprehensive coverage reporting with Codecov integration
+- **Code Quality**: Automated checks with PHPCS, PHPStan, and PHPMD
+- **Security Audits**: Regular dependency vulnerability scanning
+
+### Running Tests Locally
+
+```bash
+# Install dependencies
+composer install
+
+# Run tests
+vendor/bin/phpunit
+
+# Run tests with coverage
+vendor/bin/phpunit --coverage-html coverage
+
+# Run code quality checks (if tools are installed)
+vendor/bin/phpcs --standard=PSR12 src/ tests/
+vendor/bin/phpstan analyse src/ --level=5
+vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode
+```
+
+### Continuous Integration
+
+The project includes several GitHub Actions workflows:
+
+- **Tests**: Runs on every push and pull request
+- **Coverage**: Generates and uploads coverage reports
+- **Security**: Weekly dependency security audits
+- **Release**: Automated releases for tagged versions
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+### Development Guidelines
+
+1. Follow PSR-12 coding standards
+2. Write comprehensive tests for new features
+3. Update documentation for API changes
+4. Ensure all CI checks pass before submitting PR
 
 ## License
 
