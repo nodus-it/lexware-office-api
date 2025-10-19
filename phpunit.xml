@@ -13,10 +13,6 @@
     <testsuites>
         <testsuite name="Unit Tests">
             <directory suffix="Test.php">tests</directory>
-            <exclude>tests/Performance</exclude>
-        </testsuite>
-        <testsuite name="Performance Tests">
-            <directory suffix="Test.php">tests/Performance</directory>
         </testsuite>
     </testsuites>
 
@@ -72,12 +68,7 @@
 
     <!-- Groups for organizing tests -->
     <groups>
-        <include>
-            <group>unit</group>
-            <group>integration</group>
-        </include>
         <exclude>
-            <group>performance</group>
             <group>slow</group>
         </exclude>
     </groups>
