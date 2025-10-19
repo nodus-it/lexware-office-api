@@ -47,22 +47,37 @@ class ArticleResource extends BaseResource
     /**
      * Get all articles with optional filters
      * 
+     * @param array $filters Array of filters (supports filterType, filterArticleNumber, filterGtin)
+     * @return Paginator
+     */
+    public function all(array $filters = []): Paginator
+    {
+        return $this->connector->paginate(new GetArticlesRequest(
+            $filters['filterType'] ?? null,
+            $filters['filterArticleNumber'] ?? null,
+            $filters['filterGtin'] ?? null
+        ));
+    }
+
+    /**
+     * Get all articles with typed parameters (convenience method)
+     * 
      * @param ArticleType|null $filterType Filter by article type
      * @param string|null $filterArticleNumber Filter by article number
      * @param string|null $filterGtin Filter by GTIN
      * @return Paginator
      */
-    public function all(
+    public function allWithFilters(
         ?ArticleType $filterType = null,
         ?string      $filterArticleNumber = null,
         ?string      $filterGtin = null
     ): Paginator
     {
-        return $this->connector->paginate(new GetArticlesRequest(
-            $filterType,
-            $filterArticleNumber,
-            $filterGtin
-        ));
+        return $this->all([
+            'filterType' => $filterType,
+            'filterArticleNumber' => $filterArticleNumber,
+            'filterGtin' => $filterGtin
+        ]);
     }
 
     /**
@@ -83,27 +98,53 @@ class ArticleResource extends BaseResource
      *
      * @see https://developers.lexoffice.io/docs/#articles-endpoint-create-an-article
      *
+     * @param Data $data The article data to create
+     * @return Data
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function create(Data $data): Data
+    {
+        return $this->connector->send(new CreateArticleRequest($data))->dtoOrFail();
+    }
+
+    /**
+     * Create a new article with typed parameter (convenience method)
+     *
      * @param ArticleData $articleData The article data to create
      * @return ArticleData
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function create(ArticleData $articleData): ArticleData
+    public function createArticle(ArticleData $articleData): ArticleData
     {
-        return $this->connector->send(new CreateArticleRequest($articleData))->dtoOrFail();
+        return $this->create($articleData);
     }
 
     /**
      * Update an existing article
+     * 
+     * @param Data $data The article data to update (must include ID)
+     * @return Data
+     * @throws FatalRequestException
+     * @throws RequestException
+     */
+    public function update(Data $data): Data
+    {
+        return $this->connector->send(new UpdateArticleRequest($data))->dtoOrFail();
+    }
+
+    /**
+     * Update an existing article with typed parameter (convenience method)
      * 
      * @param ArticleData $articleData The article data to update (must include ID)
      * @return ArticleData
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function update(ArticleData $articleData): ArticleData
+    public function updateArticle(ArticleData $articleData): ArticleData
     {
-        return $this->connector->send(new UpdateArticleRequest($articleData))->dtoOrFail();
+        return $this->update($articleData);
     }
 
     /**

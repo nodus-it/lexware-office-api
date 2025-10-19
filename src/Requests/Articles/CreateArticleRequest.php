@@ -10,6 +10,11 @@ class CreateArticleRequest extends BaseCreateRequest
 {
     public function __construct(public ArticleData $articleData) {}
 
+    protected function getDataClass(): string
+    {
+        return ArticleData::class;
+    }
+
     public function resolveEndpoint(): string
     {
         return '/articles';

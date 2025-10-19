@@ -112,7 +112,7 @@ class ArticleResourceTest extends LexwareOfficeTestCase
             ])
         );
 
-        $paginator = $this->articles->findByType(ArticleType::SERVICE);
+        $paginator = $this->articles->allWithFilters(ArticleType::SERVICE);
         $articles = $paginator->items();
 
         $this->assertCount(1, $articles);

@@ -16,6 +16,11 @@ class GetArticlesRequest extends BaseListRequest
     {
     }
 
+    protected function getDataClass(): string
+    {
+        return ArticleData::class;
+    }
+
     public function resolveEndpoint(): string
     {
         return '/articles';

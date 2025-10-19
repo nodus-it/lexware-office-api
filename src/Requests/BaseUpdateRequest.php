@@ -29,8 +29,5 @@ abstract class BaseUpdateRequest extends BaseRequest implements HasBody
     /**
      * Get the ID from the data object for the endpoint
      */
-    protected function getId(): string
-    {
-        return $this->data->id;
-    }
+    abstract protected function getId(): string;
 }

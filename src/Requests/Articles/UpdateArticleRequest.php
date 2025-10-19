@@ -10,6 +10,16 @@ class UpdateArticleRequest extends BaseUpdateRequest
 {
     public function __construct(public ArticleData $articleData) {}
 
+    protected function getDataClass(): string
+    {
+        return ArticleData::class;
+    }
+
+    protected function getId(): string
+    {
+        return $this->articleData->id;
+    }
+
     public function resolveEndpoint(): string
     {
         return '/articles/'.$this->articleData->id;

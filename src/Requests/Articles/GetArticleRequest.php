@@ -10,6 +10,11 @@ class GetArticleRequest extends BaseGetRequest
 {
     public function __construct(protected string $id) {}
 
+    protected function getDataClass(): string
+    {
+        return ArticleData::class;
+    }
+
     public function resolveEndpoint(): string
     {
         return '/articles/'.$this->id;

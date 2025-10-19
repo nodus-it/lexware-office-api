@@ -71,7 +71,7 @@ class LexwareOfficeConnector extends Connector implements HasPagination
     /**
      * Configure connector from config
      */
-    public function boot(): void
+    public function boot(\Saloon\Http\PendingRequest $pendingRequest): void
     {
         $config = config('lexware-office');
         
