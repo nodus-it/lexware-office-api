@@ -105,7 +105,9 @@ class ArticleResource extends BaseResource
      */
     public function create(Data $data): Data
     {
-        return $this->connector->send(new CreateArticleRequest($data))->dtoOrFail();
+        // Cast to ArticleData for the request
+        $articleData = $data instanceof ArticleData ? $data : ArticleData::from($data->toArray());
+        return $this->connector->send(new CreateArticleRequest($articleData))->dtoOrFail();
     }
 
     /**
@@ -118,7 +120,8 @@ class ArticleResource extends BaseResource
      */
     public function createArticle(ArticleData $articleData): ArticleData
     {
-        return $this->create($articleData);
+        $result = $this->create($articleData);
+        return $result instanceof ArticleData ? $result : ArticleData::from($result->toArray());
     }
 
     /**

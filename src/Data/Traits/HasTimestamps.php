@@ -38,6 +38,6 @@ trait HasTimestamps
      */
     public function getAgeInDays(): ?int
     {
-        return $this->createdDate?->diffInDays(now());
+        return $this->createdDate ? (int) $this->createdDate->diffInDays(now()) : null;
     }
 }
