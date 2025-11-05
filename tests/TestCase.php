@@ -19,9 +19,12 @@ abstract class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $dotenv = Dotenv::createImmutable(__DIR__.'/../');
-        $dotenv->load();
+        $envPath = __DIR__.'/../';
+        if (file_exists($envPath . '.env')) {
+            $dotenv = Dotenv::createImmutable($envPath);
+            $dotenv->load();
+        }
 
-        $app['config']->set('lexware-office.auth.token', env('LEXWARE_OFFICE_API_TOKEN'));;
+        $app['config']->set('lexware-office.auth.token', env('LEXWARE_OFFICE_API_TOKEN', 'test_token'));
     }
 }
