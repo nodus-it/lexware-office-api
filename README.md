@@ -42,29 +42,19 @@ LEXWARE_OFFICE_API_TOKEN=your-token-here
 
 ## Configuration
 
-The package provides extensive configuration options:
+The package provides the following configuration options:
 
 ```env
-# API Configuration
-LEXWARE_OFFICE_API_URL=https://api.lexware.io/v1/
+# Authentication
+LEXWARE_OFFICE_API_TOKEN=your-token-here
+
+# API timeouts
 LEXWARE_OFFICE_CONNECT_TIMEOUT=30
 LEXWARE_OFFICE_REQUEST_TIMEOUT=30
 
-# Rate Limiting
-LEXWARE_OFFICE_RATE_LIMIT_RPS=2
-LEXWARE_OFFICE_BURST_LIMIT=10
-
-# Pagination
-LEXWARE_OFFICE_PAGE_SIZE=25
-LEXWARE_OFFICE_MAX_PAGE_SIZE=250
-
-# Caching (optional)
-LEXWARE_OFFICE_CACHE_ENABLED=false
-LEXWARE_OFFICE_CACHE_TTL=300
-
-# Logging (optional)
-LEXWARE_OFFICE_LOGGING_ENABLED=false
-LEXWARE_OFFICE_LOG_LEVEL=info
+# Rate limiting
+# Cache store used by the rate limiter (Laravel cache store name)
+LEXWARE_OFFICE_RATE_LIMIT_STORE=file
 ```
 
 ## Usage
