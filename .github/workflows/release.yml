@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test before release
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+        coverage: xdebug
+
+    - name: Cache Composer packages
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-8.2-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-8.2-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-interaction --no-suggest --no-dev
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Run tests
+      run: vendor/bin/pest --no-coverage
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Create Release
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-interaction --no-suggest --no-dev --optimize-autoloader
+
+    - name: Create release archive
+      run: |
+        tar -czf lexware-office-api-${GITHUB_REF#refs/tags/}.tar.gz \
+          --exclude='.git*' \
+          --exclude='tests' \
+          --exclude='.github' \
+          --exclude='phpunit.xml' \
+          --exclude='*.md' \
+          .
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Changes in this Release
+
+          Please see the [CHANGELOG.md](CHANGELOG.md) for detailed information about this release.
+
+          ## Installation
+
+          ```bash
+          composer require nodus-it/lexware-office-api:${{ github.ref }}
+          ```
+
+          ## Requirements
+
+          - PHP 8.1 or higher
+          - Saloon HTTP client
+          - Valid Lexware Office API credentials
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./lexware-office-api-${{ github.ref }}.tar.gz
+        asset_name: lexware-office-api-${{ github.ref }}.tar.gz
+        asset_content_type: application/gzip

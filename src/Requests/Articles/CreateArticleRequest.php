@@ -3,21 +3,17 @@
 namespace Nodus\LexwareOfficeApi\Requests\Articles;
 
 use Nodus\LexwareOfficeApi\Data\ArticleData;
-use Saloon\Contracts\Body\HasBody;
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use Nodus\LexwareOfficeApi\Requests\BaseCreateRequest;
 use Saloon\Http\Response;
-use Saloon\Traits\Body\HasJsonBody;
-use Saloon\Traits\Request\CreatesDtoFromResponse;
 
-class CreateArticleRequest extends Request implements HasBody
+class CreateArticleRequest extends BaseCreateRequest
 {
-    use CreatesDtoFromResponse;
-    use HasJsonBody;
-
-    protected Method $method = Method::POST;
-
     public function __construct(public ArticleData $articleData) {}
+
+    protected function getDataClass(): string
+    {
+        return ArticleData::class;
+    }
 
     public function resolveEndpoint(): string
     {
@@ -26,7 +22,7 @@ class CreateArticleRequest extends Request implements HasBody
 
     protected function defaultBody(): array
     {
-        return $this->articleData->toArray();
+        return $this->articleData->toApiArray();
     }
 
     public function createDtoFromResponse(Response $response): ArticleData

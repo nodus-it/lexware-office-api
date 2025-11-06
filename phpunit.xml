@@ -3,15 +3,66 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
->
+         processIsolation="false"
+         stopOnFailure="false"
+         cacheDirectory=".phpunit.cache"
+         backupGlobals="false"
+         backupStaticProperties="false">
+    
+    <!-- Test Suites -->
     <testsuites>
-        <testsuite name="Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Unit Tests">
+            <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
+
+    <!-- Source Code Coverage -->
     <source>
         <include>
-            <directory>src</directory>
+            <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/config</directory>
+            <file>src/LexwareOfficeServiceProvider.php</file>
+        </exclude>
     </source>
+
+    <!-- Logging and Reports -->
+    <logging>
+        <junit outputFile="tests/results/junit.xml"/>
+        <testdoxHtml outputFile="tests/results/testdox.html"/>
+        <testdoxText outputFile="tests/results/testdox.txt"/>
+    </logging>
+
+    <!-- Coverage Reports -->
+    <coverage>
+        <report>
+            <html outputDirectory="tests/results/coverage-html" lowUpperBound="50" highLowerBound="80"/>
+            <clover outputFile="tests/results/coverage.xml"/>
+            <cobertura outputFile="tests/results/cobertura.xml"/>
+            <text outputFile="tests/results/coverage.txt" showUncoveredFiles="true"/>
+        </report>
+    </coverage>
+
+    <!-- PHP Settings -->
+    <php>
+        <!-- Environment Variables for Testing -->
+        <env name="APP_ENV" value="testing"/>
+        <env name="LEXWARE_OFFICE_API_TOKEN" value="test-token-12345"/>
+        <env name="LEXWARE_OFFICE_CONNECT_TIMEOUT" value="10"/>
+        <env name="LEXWARE_OFFICE_REQUEST_TIMEOUT" value="10"/>
+        
+        <!-- PHP Settings -->
+        <ini name="memory_limit" value="512M"/>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="display_errors" value="1"/>
+        <ini name="display_startup_errors" value="1"/>
+    </php>
+
+    <!-- Groups for organizing tests -->
+    <groups>
+        <exclude>
+            <group>slow</group>
+        </exclude>
+    </groups>
 </phpunit>

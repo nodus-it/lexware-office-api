@@ -14,15 +14,31 @@ return [
             */
         'token' => env('LEXWARE_OFFICE_API_TOKEN', null),
     ],
+
+    'api' => [
+        /*
+        |--------------------------------------------------------------------------
+        | API Configuration
+        |--------------------------------------------------------------------------
+        |
+        | Timeout settings for the Lexware Office API
+        |
+        */
+        'timeout' => [
+            'connect' => env('LEXWARE_OFFICE_CONNECT_TIMEOUT', 30),
+            'request' => env('LEXWARE_OFFICE_REQUEST_TIMEOUT', 30),
+        ],
+    ],
+
     'rate_limit' => [
         /*
         |--------------------------------------------------------------------------
-        | Cache Store for rate limit
+        | Rate Limiting Configuration
         |--------------------------------------------------------------------------
         |
-        | For rate limit this package uses the laravel cache store. Use one of your cache store names
+        | Configure the cache store used by the rate limiter
         |
         */
-        'store' => 'file',
+        'store' => env('LEXWARE_OFFICE_RATE_LIMIT_STORE', 'file'),
     ],
 ];

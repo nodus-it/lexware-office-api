@@ -17,4 +17,4 @@ test('test article can be created', function () {
         ->and($getArticle->unitName)->toBe($testArticle->unitName);
 
     LexwareOfficeApi::articles()->delete($getArticle->id);
-});
+})->group('slow');

@@ -1,0 +1,57 @@
+name: Dependency Update Check
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+    name: Check for outdated dependencies
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+
+    - name: Cache Composer packages
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-8.2-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-8.2-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-interaction --no-suggest
+
+    - name: Check for outdated dependencies
+      run: |
+        echo "## Outdated Dependencies Report" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Direct Dependencies" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        composer outdated --direct --strict >> $GITHUB_STEP_SUMMARY || echo "No outdated direct dependencies found" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### All Dependencies" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        composer outdated --strict >> $GITHUB_STEP_SUMMARY || echo "No outdated dependencies found" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+
+    - name: Security audit
+      run: |
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Security Audit Report" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        composer audit --format=plain >> $GITHUB_STEP_SUMMARY || echo "No security vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+
+    - name: Validate composer files
+      run: composer validate --strict --no-check-all

@@ -4,10 +4,14 @@ namespace Nodus\LexwareOfficeApi\Data;
 
 use Nodus\LexwareOfficeApi\Data\Enums\ArticleType;
 use Nodus\LexwareOfficeApi\Data\Traits\HasCreateAndUpdatedDate;
+use Nodus\LexwareOfficeApi\Data\Traits\HasTimestamps;
+use Nodus\LexwareOfficeApi\Data\Traits\HasVersioning;
 
 class ArticleData extends BaseData
 {
     use HasCreateAndUpdatedDate;
+    use HasTimestamps;
+    use HasVersioning;
 
     public string $id;
 
@@ -29,5 +33,5 @@ class ArticleData extends BaseData
 
     public ?ArticlePrice $price;
 
-    public ?int $version;
+    // Version is handled by HasVersioning trait
 }
