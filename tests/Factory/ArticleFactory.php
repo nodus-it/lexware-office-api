@@ -19,7 +19,7 @@ class ArticleFactory extends Factory
             'gtin' => $faker->ean13(),
             'note' => $faker->text,
             'unitName' => $faker->randomElement(['Stück', 'Meter', 'Kilogramm']),
-            'price' => ArticlePriceFactory::make()
+            'price' => ArticlePriceFactory::make(),
         ]);
     }
 }

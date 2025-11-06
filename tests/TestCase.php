@@ -12,19 +12,16 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            LaravelDataServiceProvider::class,
             LexwareOfficeApiServiceProvider::class,
         ];
     }
 
     protected function getEnvironmentSetUp($app)
     {
-        $envPath = __DIR__.'/../';
-        if (file_exists($envPath . '.env')) {
-            $dotenv = Dotenv::createImmutable($envPath);
-            $dotenv->load();
-        }
+        // Load env variables if .env is present, otherwise continue
+        $dotenv = Dotenv::createImmutable(__DIR__.'/../');
+        $dotenv->safeLoad();
 
-        $app['config']->set('lexware-office.auth.token', env('LEXWARE_OFFICE_API_TOKEN', 'test_token'));
+        $app['config']->set('lexware-office.auth.token', env('LEXWARE_OFFICE_API_TOKEN'));
     }
 }

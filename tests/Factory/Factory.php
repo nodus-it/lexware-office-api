@@ -2,7 +2,4 @@
 
 namespace Tests\Factory;
 
-abstract class Factory
-{
-
-}
+abstract class Factory {}

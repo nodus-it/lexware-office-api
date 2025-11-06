@@ -10,7 +10,7 @@ class LexwareOfficeResource
 
     public function __construct()
     {
-        $this->connector = new LexwareOfficeConnector();
+        $this->connector = new LexwareOfficeConnector;
     }
 
     public function articles(): ArticleResource

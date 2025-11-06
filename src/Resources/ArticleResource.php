@@ -70,10 +70,9 @@ class ArticleResource extends BaseResource
      */
     public function allWithFilters(
         ?ArticleType $filterType = null,
-        ?string      $filterArticleNumber = null,
-        ?string      $filterGtin = null
-    ): Paginator
-    {
+        ?string $filterArticleNumber = null,
+        ?string $filterGtin = null
+    ): Paginator {
         return $this->all([
             'filterType' => $filterType,
             'filterArticleNumber' => $filterArticleNumber,

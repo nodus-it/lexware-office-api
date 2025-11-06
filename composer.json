@@ -52,5 +52,16 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "format": "vendor/bin/pint",
+        "lint": "vendor/bin/pint -v",
+        "stan": "vendor/bin/phpstan analyse",
+        "unit": "vendor/bin/pest --coverage",
+        "test": [
+            "@format",
+            "@stan",
+            "@unit"
+        ]
     }
 }

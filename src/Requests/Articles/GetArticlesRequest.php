@@ -11,10 +11,8 @@ class GetArticlesRequest extends BaseListRequest
 {
     public function __construct(
         protected ?ArticleType $filterType,
-        protected ?string      $filterArticleNumber,
-        protected ?string      $filterGtin)
-    {
-    }
+        protected ?string $filterArticleNumber,
+        protected ?string $filterGtin) {}
 
     protected function getDataClass(): string
     {

@@ -10,7 +10,6 @@ use Nodus\LexwareOfficeApi\Resources\LexwareOfficeResource;
  */
 class LexwareOfficeApi extends Facade
 {
-
     protected static function getFacadeAccessor(): string
     {
         return 'lexware-office-api';
